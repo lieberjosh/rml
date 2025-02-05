@@ -14,11 +14,11 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#boundingVolume
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:domain [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasImage ;
+                              owl:onProperty :boundingVolume ;
                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                               owl:onClass <http://www.opengis.net/ont/geosparql#Geometry>
                             ] ;
@@ -27,11 +27,11 @@
                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                              owl:onClass :Volume
                            ] ;
-                <http://www.w3.org/2004/02/skos/core#definition> "property of a geometry connecting to the volume and in turn the pose that provides the coordinate reference frame in which the geometry is specified" ;
+                <http://www.w3.org/2004/02/skos/core#definition> "property of a geometry connecting to the volume and in turn the pose that provides a bounding hull and the coordinate reference frame in which the geometry is specified" ;
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "boundingVolume" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#bounds
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/bounds
 :bounds rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :contains ;
         rdfs:domain [ rdf:type owl:Restriction ;
@@ -47,7 +47,7 @@
         <http://www.w3.org/2004/02/skos/core#prefLabel> "bounds" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#contains
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/contains
 :contains rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf owl:topObjectProperty ;
           rdfs:domain [ rdf:type owl:Restriction ;
@@ -59,14 +59,14 @@
           <http://www.w3.org/2004/02/skos/core#prefLabel> "contains" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#goImage
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/goImage
 :goImage rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :hasImage ;
          <http://www.w3.org/2004/02/skos/core#definition> "Image which documents a valid state of an entity critical to a valid workstate" ;
          <http://www.w3.org/2004/02/skos/core#prefLabel> "goImage" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasFrame
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFrame
 :hasFrame rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf owl:topObjectProperty ;
           rdfs:range [ rdf:type owl:Restriction ;
@@ -77,7 +77,7 @@
           <http://www.w3.org/2004/02/skos/core#prefLabel> "hasFrame" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasImage
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImage
 :hasImage rdf:type owl:ObjectProperty ;
           rdfs:range [ rdf:type owl:Restriction ;
                        owl:onProperty :hasImage ;
@@ -87,7 +87,7 @@
           <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImage" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasPose
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasPose
 :hasPose rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
          rdfs:range [ rdf:type owl:Restriction ;
@@ -99,7 +99,7 @@
          <http://www.w3.org/2004/02/skos/core#prefLabel> "hasPose" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#innerFrame
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/innerFrame
 :innerFrame rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :hasFrame ;
             rdfs:domain [ rdf:type owl:Restriction ;
@@ -114,14 +114,14 @@
                        ] .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#noGoImage
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/noGoImage
 :noGoImage rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :hasImage ;
            <http://www.w3.org/2004/02/skos/core#definition> "Image representation of an invalid entity state critical to a valid workstate" ;
            <http://www.w3.org/2004/02/skos/core#prefLabel> "noGoImage" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#outerFrame
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/outerFrame
 :outerFrame rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :hasFrame ;
             rdfs:domain [ rdf:type owl:Restriction ;
@@ -140,22 +140,22 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#asLTP-ENUSpec
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asLTP-ENUSpec
 :asLTP-ENUSpec rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf :hasFrameSpec .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#asMatrixSpec
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asMatrixSpec
 :asMatrixSpec rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :hasFrameSpec .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#asQuarternionGenericSpec
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asQuarternionGenericSpec
 :asQuarternionGenericSpec rdf:type owl:DatatypeProperty ;
                           rdfs:subPropertyOf :hasFrameSpec .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasFrameSpec
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFrameSpec
 :hasFrameSpec rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain :Frame ;
@@ -163,14 +163,14 @@
               <http://www.w3.org/2004/02/skos/core#prefLabel> "hasFrameSpec" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasImageData
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImageData
 :hasImageData rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
               <http://www.w3.org/2004/02/skos/core#definition> "Top data property for serialized image data" ;
               <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageData" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasImageNormal
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImageNormal
 :hasImageNormal rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
                 <http://www.w3.org/2004/02/skos/core#definition> "Data property representing the pose of an image relative to its subject feature" ;
@@ -189,30 +189,11 @@
 <http://www.opengis.net/ont/geosparql#Geometry> rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#Frame
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
 :Frame rdf:type owl:Class ;
        rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
        <http://www.w3.org/2004/02/skos/core#definition> "Identified spatial reference frame" ;
        <http://www.w3.org/2004/02/skos/core#prefLabel> "Frame" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PoseCollection
-:PoseCollection rdf:type owl:Class ;
-                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> ;
-                <http://www.w3.org/2004/02/skos/core#definition> "Collection of Poses" ;
-                <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#ProcessStep
-:ProcessStep rdf:type owl:Class ;
-             <http://www.w3.org/2004/02/skos/core#definition> "Segment of a process from one WorkState to another WorkState" ;
-             <http://www.w3.org/2004/02/skos/core#prefLabel> "ProcessStep" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#WorkState
-:WorkState rdf:type owl:Class ;
-           <http://www.w3.org/2004/02/skos/core#definition> "State of entities that begins and ends workflow process steps" ;
-           <http://www.w3.org/2004/02/skos/core#prefLabel> "WorkState" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GeoPose
@@ -230,6 +211,19 @@
       rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
       <http://www.w3.org/2004/02/skos/core#definition> "Pose as defined by https://www.ogc.org/publications/standard/geopose/" ;
       <http://www.w3.org/2004/02/skos/core#prefLabel> "Pose" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/PoseCollection
+:PoseCollection rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Collection of Poses" ;
+                <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessStep
+:ProcessStep rdf:type owl:Class ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Segment of a process from one WorkState to another WorkState" ;
+             <http://www.w3.org/2004/02/skos/core#prefLabel> "ProcessStep" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/RMLFeature
@@ -259,11 +253,17 @@
         <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Volume" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/WorkState
+:WorkState rdf:type owl:Class ;
+           <http://www.w3.org/2004/02/skos/core#definition> "State of entities that begins and ends workflow process steps" ;
+           <http://www.w3.org/2004/02/skos/core#prefLabel> "WorkState" .
+
+
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoop
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoop
 :GreenScoop rdf:type owl:NamedIndividual ,
                      <http://www.opengis.net/ont/geosparql#Feature> .
 
