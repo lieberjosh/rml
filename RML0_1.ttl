@@ -14,20 +14,28 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasImageNormal
+:hasImageNormal rdf:type owl:ObjectProperty ;
+                rdfs:domain :RML_Image ;
+                rdfs:range :Pose ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Property connecting an image with its \"image normal\" pose relative to the spatial object(s) being imaged." ;
+                <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageNormal" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:domain [ rdf:type owl:Restriction ;
                               owl:onProperty :boundingVolume ;
                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                              owl:onClass <http://www.opengis.net/ont/geosparql#Geometry>
+                              owl:onClass <http://www.opengis.net/ont/geosparql#SpatialObject>
                             ] ;
                 rdfs:range [ rdf:type owl:Restriction ;
                              owl:onProperty :boundingVolume ;
                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                              owl:onClass :Volume
                            ] ;
-                <http://www.w3.org/2004/02/skos/core#definition> "property of a geometry connecting to the volume and in turn the pose that provides a bounding hull and the coordinate reference frame in which the geometry is specified" ;
+                <http://www.w3.org/2004/02/skos/core#definition> "property of a geometry connecting to the volume and in turn the pose that provides a bounding hull and the coordinate reference frame (inner frame) in which the geometry is specified" ;
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "boundingVolume" .
 
 
@@ -52,10 +60,13 @@
           rdfs:subPropertyOf owl:topObjectProperty ;
           rdfs:domain [ rdf:type owl:Restriction ;
                         owl:onProperty :contains ;
-                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onClass :Volume
+                        owl:someValuesFrom :Volume
                       ] ;
-          <http://www.w3.org/2004/02/skos/core#definition> "4D containment of a spatial object by a volume. The volume may also define the coordinate reference system by which the spatial object position is defined." ;
+          rdfs:range [ rdf:type owl:Restriction ;
+                       owl:onProperty :contains ;
+                       owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                     ] ;
+          <http://www.w3.org/2004/02/skos/core#definition> "4D containment of a spatial object by a volume." ;
           <http://www.w3.org/2004/02/skos/core#prefLabel> "contains" .
 
 
@@ -69,6 +80,10 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFrame
 :hasFrame rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasPose ;
+                        owl:someValuesFrom :Pose
+                      ] ;
           rdfs:range [ rdf:type owl:Restriction ;
                        owl:onProperty :hasFrame ;
                        owl:someValuesFrom :Frame
@@ -79,6 +94,10 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImage
 :hasImage rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasImage ;
+                        owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                      ] ;
           rdfs:range [ rdf:type owl:Restriction ;
                        owl:onProperty :hasImage ;
                        owl:someValuesFrom :RML_Image
@@ -90,10 +109,13 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasPose
 :hasPose rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasPose ;
+                       owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                     ] ;
          rdfs:range [ rdf:type owl:Restriction ;
                       owl:onProperty :hasPose ;
-                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                      owl:onClass :Pose
+                      owl:someValuesFrom :Pose
                     ] ;
          <http://www.w3.org/2004/02/skos/core#definition> "Property of a feature that locates and orients it at some time (instant or interval)  by means of a pose" ;
          <http://www.w3.org/2004/02/skos/core#prefLabel> "hasPose" .
@@ -166,15 +188,9 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImageData
 :hasImageData rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :RML_Image ;
               <http://www.w3.org/2004/02/skos/core#definition> "Top data property for serialized image data" ;
               <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageData" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImageNormal
-:hasImageNormal rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf owl:topDataProperty ;
-                <http://www.w3.org/2004/02/skos/core#definition> "Data property representing the pose of an image relative to its subject feature" ;
-                <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageNormal" .
 
 
 #################################################################
@@ -182,11 +198,21 @@
 #################################################################
 
 ###  http://www.opengis.net/ont/geosparql#Feature
-<http://www.opengis.net/ont/geosparql#Feature> rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+<http://www.opengis.net/ont/geosparql#Feature> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
 
 
 ###  http://www.opengis.net/ont/geosparql#Geometry
-<http://www.opengis.net/ont/geosparql#Geometry> rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+<http://www.opengis.net/ont/geosparql#Geometry> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObject
+<http://www.opengis.net/ont/geosparql#SpatialObject> rdf:type owl:Class .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObjectCollection
+<http://www.opengis.net/ont/geosparql#SpatialObjectCollection> rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
