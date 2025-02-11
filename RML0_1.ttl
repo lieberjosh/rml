@@ -22,6 +22,24 @@
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageNormal" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasProcessState
+:hasProcessState rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Process ;
+                 rdfs:range [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasProcessState ;
+                              owl:someValuesFrom :ProcessState
+                            ] .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasProcessStep
+:hasProcessStep rdf:type owl:ObjectProperty ;
+                rdfs:domain :Process ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasProcessStep ;
+                             owl:someValuesFrom :ProcessStep
+                           ] .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
@@ -215,6 +233,17 @@
 <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> rdf:type owl:Class .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#Process
+:Process rdf:type owl:Class ;
+         rdfs:subClassOf :ProcessObject ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Process (workflow) defined by linked ProcessSteps and ProcessStates" ;
+         <http://www.w3.org/2004/02/skos/core#prefLabel> "Process" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#ProcessObject
+:ProcessObject rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
 :Frame rdf:type owl:Class ;
        rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
@@ -246,8 +275,16 @@
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessState
+:ProcessState rdf:type owl:Class ;
+              rdfs:subClassOf :ProcessObject ;
+              <http://www.w3.org/2004/02/skos/core#definition> "State of entities that begins and ends workflow process steps" ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "WorkState" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessStep
 :ProcessStep rdf:type owl:Class ;
+             rdfs:subClassOf :ProcessObject ;
              <http://www.w3.org/2004/02/skos/core#definition> "Segment of a process from one WorkState to another WorkState" ;
              <http://www.w3.org/2004/02/skos/core#prefLabel> "ProcessStep" .
 
@@ -277,12 +314,6 @@
 :Volume rdf:type owl:Class ;
         rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Volume" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/WorkState
-:WorkState rdf:type owl:Class ;
-           <http://www.w3.org/2004/02/skos/core#definition> "State of entities that begins and ends workflow process steps" ;
-           <http://www.w3.org/2004/02/skos/core#prefLabel> "WorkState" .
 
 
 #################################################################
