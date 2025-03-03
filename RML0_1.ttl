@@ -14,35 +14,33 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasImageNormal
-:hasImageNormal rdf:type owl:ObjectProperty ;
-                rdfs:domain :RML_Image ;
-                rdfs:range :Pose ;
-                <http://www.w3.org/2004/02/skos/core#definition> "Property connecting an image with its \"image normal\" pose relative to the spatial object(s) being imaged." ;
-                <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageNormal" .
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasFeatureState
+:hasFeatureState rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:range :FeatureState ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Connects a target / observed feature state with a process state" ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "hasFeatureState" .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasProcessState
-:hasProcessState rdf:type owl:ObjectProperty ;
-                 rdfs:domain :Process ;
-                 rdfs:range [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasProcessState ;
-                              owl:someValuesFrom :ProcessState
-                            ] .
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#partOf
+:partOf rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasProcessStep
-:hasProcessStep rdf:type owl:ObjectProperty ;
-                rdfs:domain :Process ;
-                rdfs:range [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasProcessStep ;
-                             owl:someValuesFrom :ProcessStep
-                           ] .
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#referenceVolume
+:referenceVolume rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :volume ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Volume providing the coordinate reference system for a spatial object (geometry or pose)" ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "referenceVolume" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#volume
+:volume rdf:type owl:ObjectProperty ;
+        rdfs:range :Volume .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:subPropertyOf :volume ;
                 rdfs:domain [ rdf:type owl:Restriction ;
                               owl:onProperty :boundingVolume ;
                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -124,6 +122,14 @@
           <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImage" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasImageNormal
+:hasImageNormal rdf:type owl:ObjectProperty ;
+                rdfs:domain :RML_Image ;
+                rdfs:range :Pose ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Property connecting an image with its \"image normal\" pose relative to the spatial object(s) being imaged." ;
+                <http://www.w3.org/2004/02/skos/core#prefLabel> "hasImageNormal" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasPose
 :hasPose rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
@@ -137,6 +143,24 @@
                     ] ;
          <http://www.w3.org/2004/02/skos/core#definition> "Property of a feature that locates and orients it at some time (instant or interval)  by means of a pose" ;
          <http://www.w3.org/2004/02/skos/core#prefLabel> "hasPose" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasProcessState
+:hasProcessState rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Process ;
+                 rdfs:range [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasProcessState ;
+                              owl:someValuesFrom :ProcessState
+                            ] .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasProcessStep
+:hasProcessStep rdf:type owl:ObjectProperty ;
+                rdfs:domain :Process ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasProcessStep ;
+                             owl:someValuesFrom :ProcessStep
+                           ] .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/innerFrame
@@ -233,15 +257,9 @@
 <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#Process
-:Process rdf:type owl:Class ;
-         rdfs:subClassOf :ProcessObject ;
-         <http://www.w3.org/2004/02/skos/core#definition> "Process (workflow) defined by linked ProcessSteps and ProcessStates" ;
-         <http://www.w3.org/2004/02/skos/core#prefLabel> "Process" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#ProcessObject
-:ProcessObject rdf:type owl:Class .
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#FeatureState
+:FeatureState rdf:type owl:Class ;
+              rdfs:subClassOf :ProcessObject .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
@@ -258,7 +276,9 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GeoVolume
 :GeoVolume rdf:type owl:Class ;
-           rdfs:subClassOf :Volume .
+           rdfs:subClassOf :Volume ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Volume that is positioned, oriented, and delimited in a geocentric coordinate reference frame" ;
+           <http://www.w3.org/2004/02/skos/core#prefLabel> "GeoVolume" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Pose
@@ -275,6 +295,17 @@
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Process
+:Process rdf:type owl:Class ;
+         rdfs:subClassOf :ProcessObject ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Process (workflow) defined by linked ProcessSteps and ProcessStates" ;
+         <http://www.w3.org/2004/02/skos/core#prefLabel> "Process" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessObject
+:ProcessObject rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessState
 :ProcessState rdf:type owl:Class ;
               rdfs:subClassOf :ProcessObject ;
@@ -287,13 +318,6 @@
              rdfs:subClassOf :ProcessObject ;
              <http://www.w3.org/2004/02/skos/core#definition> "Segment of a process from one WorkState to another WorkState" ;
              <http://www.w3.org/2004/02/skos/core#prefLabel> "ProcessStep" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/RMLFeature
-:RMLFeature rdf:type owl:Class ;
-            rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> ;
-            <http://www.w3.org/2004/02/skos/core#definition> "Dynamic GeoSPARQL Feature with Pose, Image, and Volume properties" ;
-            <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Feature" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/RML_Image
@@ -313,6 +337,7 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Volume
 :Volume rdf:type owl:Class ;
         rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Positioned, oriented, and delimited spatial volume" ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Volume" .
 
 
@@ -320,9 +345,110 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoopGeometry
+:GreenScoopGeometry rdf:type owl:NamedIndividual ;
+                    <http://www.opengis.net/ont/geosparql#hasSerialization> "" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoopImage-1
+:GreenScoopImage-1 rdf:type owl:NamedIndividual ,
+                            :RML_Image .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoopPosition
+:GreenScoopPosition rdf:type owl:NamedIndividual ,
+                             :Pose ;
+                    :referenceVolume :LabSpace ;
+                    :hasFrameSpec "" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoopSpace
+:GreenScoopSpace rdf:type owl:NamedIndividual ,
+                          :Volume .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#GreenScoopState-1
+:GreenScoopState-1 rdf:type owl:NamedIndividual ,
+                            :FeatureState ;
+                   :goImage :GreenScoopImage-1 ;
+                   :hasPose :GreenScoopPosition .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#Lab
+:Lab rdf:type owl:NamedIndividual ,
+              <http://www.opengis.net/ont/geosparql#Feature> ;
+     :boundingVolume :LabSpace ;
+     :contains :Press .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#LabPosition
+:LabPosition rdf:type owl:NamedIndividual ,
+                      :GeoPose .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#LabSpace
+:LabSpace rdf:type owl:NamedIndividual ,
+                   :GeoVolume ,
+                   :Volume ;
+          :hasPose :LabPosition .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PowerLight
+:PowerLight rdf:type owl:NamedIndividual ,
+                     <http://www.opengis.net/ont/geosparql#Feature> ;
+            :partOf :Press ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Power On/Off light on press" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PowerLightIMage-2
+:PowerLightIMage-2 rdf:type owl:NamedIndividual ,
+                            :RML_Image .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PowerLightImage-1
+:PowerLightImage-1 rdf:type owl:NamedIndividual ,
+                            :RML_Image .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PowerLightPosition
+:PowerLightPosition rdf:type owl:NamedIndividual ,
+                             :Pose ;
+                    :referenceVolume :PressSpace ;
+                    :hasFrameSpec "" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PowerLightState
+:PowerLightState rdf:type owl:NamedIndividual ,
+                          :FeatureState ;
+                 :goImage :PowerLightImage-1 ;
+                 :noGoImage :PowerLightIMage-2 .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#Press
+:Press rdf:type owl:NamedIndividual ,
+                <http://www.opengis.net/ont/geosparql#Feature> ;
+       :boundingVolume :PressSpace ;
+       <http://www.w3.org/2004/02/skos/core#definition> "Powder press used for procedure" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PressPosition
+:PressPosition rdf:type owl:NamedIndividual ,
+                        :Pose ;
+               :referenceVolume :LabSpace ;
+               :hasFrameSpec "" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#PressSpace
+:PressSpace rdf:type owl:NamedIndividual ,
+                     :Volume ;
+            :hasPose :PressPosition .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoop
 :GreenScoop rdf:type owl:NamedIndividual ,
-                     <http://www.opengis.net/ont/geosparql#Feature> .
+                     <http://www.opengis.net/ont/geosparql#Feature> ;
+            :hasFeatureState :GreenScoopState-1 ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Scoop used to pack powder into press jig" .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
