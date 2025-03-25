@@ -8,40 +8,12 @@
 
 <http://www.semanticweb.org/joshlie/ontologies/2025/1/rml> rdf:type owl:Ontology ;
                                                             owl:imports <http://www.opengis.net/ont/geosparql/1.1> ,
-                                                                        <http://www.w3.org/2006/time#2016> .
+                                                                        <http://www.w3.org/2006/time#2016> ,
+                                                                        <https://w3id.org/ibp/StateMachineOntology-1.0.0> .
 
 #################################################################
 #    Object Properties
 #################################################################
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#goFeatureState
-:goFeatureState rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :hasFeatureState ;
-                owl:propertyDisjointWith :stopFeatureState ;
-                <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState  that is close enough to the target FeatureState for the next ProcessStep to proceed." ;
-                <http://www.w3.org/2004/02/skos/core#prefLabel> "goFeatureState" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#obsFeatureState
-:obsFeatureState rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :hasFeatureState ;
-                 <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState" ;
-                 <http://www.w3.org/2004/02/skos/core#prefLabel> "obsFeatureState" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#stopFeatureState
-:stopFeatureState rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf :hasFeatureState ;
-                  <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState which is not suitable for the process step to proceed." ;
-                  <http://www.w3.org/2004/02/skos/core#prefLabel> "stopFeatureState" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#targetFeatureState
-:targetFeatureState rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf :hasFeatureState ;
-                    <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to a target FeatureState" ;
-                    <http://www.w3.org/2004/02/skos/core#prefLabel> "targetFeatureState" .
-
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
@@ -91,6 +63,14 @@
           <http://www.w3.org/2004/02/skos/core#prefLabel> "contains" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/goFeatureState
+:goFeatureState rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasFeatureState ;
+                owl:propertyDisjointWith :stopFeatureState ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState  that is close enough to the target FeatureState for the next ProcessStep to proceed." ;
+                <http://www.w3.org/2004/02/skos/core#prefLabel> "goFeatureState" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/goImage
 :goImage rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :hasImage ;
@@ -101,7 +81,7 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFeatureState
 :hasFeatureState rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf owl:topObjectProperty ;
-                 rdfs:range :FeatureState ;
+                 rdfs:domain <https://w3id.org/ibp/StateMachineOntology#State> ;
                  <http://www.w3.org/2004/02/skos/core#definition> "Connects a target / observed feature state with a process state" ;
                  <http://www.w3.org/2004/02/skos/core#prefLabel> "hasFeatureState" .
 
@@ -159,21 +139,11 @@
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasProcessState
-:hasProcessState rdf:type owl:ObjectProperty ;
-                 rdfs:domain :Process ;
-                 rdfs:range [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasProcessState ;
-                              owl:someValuesFrom :ProcessState
-                            ] .
+:hasProcessState rdf:type owl:ObjectProperty .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasProcessStep
-:hasProcessStep rdf:type owl:ObjectProperty ;
-                rdfs:domain :Process ;
-                rdfs:range [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasProcessStep ;
-                             owl:someValuesFrom :ProcessStep
-                           ] .
+:hasProcessStep rdf:type owl:ObjectProperty .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/innerFrame
@@ -196,6 +166,13 @@
            rdfs:subPropertyOf :hasImage ;
            <http://www.w3.org/2004/02/skos/core#definition> "Image representation of an invalid entity state critical to a valid workstate" ;
            <http://www.w3.org/2004/02/skos/core#prefLabel> "noGoImage" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/obsFeatureState
+:obsFeatureState rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasFeatureState ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState" ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "obsFeatureState" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/outerFrame
@@ -224,6 +201,20 @@
                  <http://www.w3.org/2004/02/skos/core#prefLabel> "referenceVolume" .
 
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/stopFeatureState
+:stopFeatureState rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasFeatureState ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to an observed FeatureState which is not suitable for the process step to proceed." ;
+                  <http://www.w3.org/2004/02/skos/core#prefLabel> "stopFeatureState" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/targetFeatureState
+:targetFeatureState rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :hasFeatureState ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "Connects a ProcessState to a target FeatureState" ;
+                    <http://www.w3.org/2004/02/skos/core#prefLabel> "targetFeatureState" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/volume
 :volume rdf:type owl:ObjectProperty ;
         rdfs:range :Volume .
@@ -232,15 +223,6 @@
 #################################################################
 #    Data properties
 #################################################################
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasAugmentation
-:hasAugmentation rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf owl:topDataProperty ;
-                 rdfs:domain :FeatureState ;
-                 rdfs:range rdfs:Literal ;
-                 <http://www.w3.org/2004/02/skos/core#definition> "Connects a FeatureState to an rdfs:Literal to be used as AR content." ;
-                 <http://www.w3.org/2004/02/skos/core#prefLabel> "hasAugmentation" .
-
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asLTP-ENUSpec
 :asLTP-ENUSpec rdf:type owl:DatatypeProperty ;
@@ -255,6 +237,14 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asQuarternionGenericSpec
 :asQuarternionGenericSpec rdf:type owl:DatatypeProperty ;
                           rdfs:subPropertyOf :hasFrameSpec .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasAugmentation
+:hasAugmentation rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:range rdfs:Literal ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Connects a FeatureState to an rdfs:Literal to be used as AR content." ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "hasAugmentation" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFrameSpec
@@ -295,11 +285,6 @@
 <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/FeatureState
-:FeatureState rdf:type owl:Class ;
-              rdfs:subClassOf :ProcessObject .
-
-
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
 :Frame rdf:type owl:Class ;
        rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
@@ -331,31 +316,6 @@
                 rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> ;
                 <http://www.w3.org/2004/02/skos/core#definition> "Collection of Poses" ;
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Process
-:Process rdf:type owl:Class ;
-         rdfs:subClassOf :ProcessObject ;
-         <http://www.w3.org/2004/02/skos/core#definition> "Process (workflow) defined by linked ProcessSteps and ProcessStates" ;
-         <http://www.w3.org/2004/02/skos/core#prefLabel> "Process" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessObject
-:ProcessObject rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessState
-:ProcessState rdf:type owl:Class ;
-              rdfs:subClassOf :ProcessObject ;
-              <http://www.w3.org/2004/02/skos/core#definition> "State of entities that begins and ends workflow process steps" ;
-              <http://www.w3.org/2004/02/skos/core#prefLabel> "WorkState" .
-
-
-###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/ProcessStep
-:ProcessStep rdf:type owl:Class ;
-             rdfs:subClassOf :ProcessObject ;
-             <http://www.w3.org/2004/02/skos/core#definition> "Segment of a process from one WorkState to another WorkState" ;
-             <http://www.w3.org/2004/02/skos/core#prefLabel> "ProcessStep" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/RML_Image
@@ -414,8 +374,7 @@
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoopState-1
-:GreenScoopState-1 rdf:type owl:NamedIndividual ,
-                            :FeatureState ;
+:GreenScoopState-1 rdf:type owl:NamedIndividual ;
                    :goImage :GreenScoopImage-1 ;
                    :hasPose :GreenScoopPosition .
 
@@ -464,8 +423,7 @@
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/PowerLightState
-:PowerLightState rdf:type owl:NamedIndividual ,
-                          :FeatureState ;
+:PowerLightState rdf:type owl:NamedIndividual ;
                  :goImage :PowerLightImage-1 ;
                  :noGoImage :PowerLightIMage-2 .
 
