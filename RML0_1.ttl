@@ -228,7 +228,9 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asLTP-ENUSpec
 :asLTP-ENUSpec rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf :hasFrameSpec .
+               rdfs:subPropertyOf :hasFrameSpec ;
+               <http://www.w3.org/2004/02/skos/core#definition> "text/json serialization of the LTP-ENU FrameSpec as defined in the GeoPose 1.0 standard, e.g. https://docs.ogc.org/is/21-056r11/21-056r11.html#cc-basic-ypr-json-1" ;
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "asLTP-ENUSpec" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asMatrixSpec
