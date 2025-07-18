@@ -1,6 +1,8 @@
 @prefix : <http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix smo: <https://w3id.org/ibp/StateMachineOntology#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -21,7 +23,7 @@
                 rdfs:domain [ rdf:type owl:Restriction ;
                               owl:onProperty :boundingVolume ;
                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                              owl:onClass <http://www.opengis.net/ont/geosparql#SpatialObject>
+                              owl:onClass geo:SpatialObject
                             ] ;
                 rdfs:range [ rdf:type owl:Restriction ;
                              owl:onProperty :boundingVolume ;
@@ -42,7 +44,7 @@
                     ] ;
         rdfs:range [ rdf:type owl:Restriction ;
                      owl:onProperty :bounds ;
-                     owl:someValuesFrom <http://www.opengis.net/ont/geosparql#Geometry>
+                     owl:someValuesFrom geo:Geometry
                    ] ;
         <http://www.w3.org/2004/02/skos/core#definition> "4D bounding of a geometry by a bounding volume. For dynamic features, the bounding volume also provides the coordinate reference system in which the geometric positions are provided (hasSerialization)." ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "bounds" .
@@ -57,7 +59,7 @@
                       ] ;
           rdfs:range [ rdf:type owl:Restriction ;
                        owl:onProperty :contains ;
-                       owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                       owl:someValuesFrom geo:SpatialObject
                      ] ;
           <http://www.w3.org/2004/02/skos/core#definition> "4D containment of a spatial object by a volume." ;
           <http://www.w3.org/2004/02/skos/core#prefLabel> "contains" .
@@ -81,7 +83,7 @@
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasFeatureState
 :hasFeatureState rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf owl:topObjectProperty ;
-                 rdfs:domain <https://w3id.org/ibp/StateMachineOntology#State> ;
+                 rdfs:domain smo:State ;
                  <http://www.w3.org/2004/02/skos/core#definition> "Connects a target / observed feature state with a process state" ;
                  <http://www.w3.org/2004/02/skos/core#prefLabel> "hasFeatureState" .
 
@@ -105,7 +107,7 @@
 :hasImage rdf:type owl:ObjectProperty ;
           rdfs:domain [ rdf:type owl:Restriction ;
                         owl:onProperty :hasImage ;
-                        owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                        owl:someValuesFrom geo:SpatialObject
                       ] ;
           rdfs:range [ rdf:type owl:Restriction ;
                        owl:onProperty :hasImage ;
@@ -128,7 +130,7 @@
          rdfs:subPropertyOf owl:topObjectProperty ;
          rdfs:domain [ rdf:type owl:Restriction ;
                        owl:onProperty :hasPose ;
-                       owl:someValuesFrom <http://www.opengis.net/ont/geosparql#SpatialObject>
+                       owl:someValuesFrom geo:SpatialObject
                      ] ;
          rdfs:range [ rdf:type owl:Restriction ;
                       owl:onProperty :hasPose ;
@@ -268,26 +270,26 @@
 #################################################################
 
 ###  http://www.opengis.net/ont/geosparql#Feature
-<http://www.opengis.net/ont/geosparql#Feature> rdf:type owl:Class ;
-                                               rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+geo:Feature rdf:type owl:Class ;
+            rdfs:subClassOf geo:SpatialObject .
 
 
 ###  http://www.opengis.net/ont/geosparql#Geometry
-<http://www.opengis.net/ont/geosparql#Geometry> rdf:type owl:Class ;
-                                                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+geo:Geometry rdf:type owl:Class ;
+             rdfs:subClassOf geo:SpatialObject .
 
 
 ###  http://www.opengis.net/ont/geosparql#SpatialObject
-<http://www.opengis.net/ont/geosparql#SpatialObject> rdf:type owl:Class .
+geo:SpatialObject rdf:type owl:Class .
 
 
 ###  http://www.opengis.net/ont/geosparql#SpatialObjectCollection
-<http://www.opengis.net/ont/geosparql#SpatialObjectCollection> rdf:type owl:Class .
+geo:SpatialObjectCollection rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Frame
 :Frame rdf:type owl:Class ;
-       rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+       rdfs:subClassOf geo:SpatialObject ;
        <http://www.w3.org/2004/02/skos/core#definition> "Identified spatial reference frame" ;
        <http://www.w3.org/2004/02/skos/core#prefLabel> "Frame" .
 
@@ -306,35 +308,35 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Pose
 :Pose rdf:type owl:Class ;
-      rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+      rdfs:subClassOf geo:SpatialObject ;
       <http://www.w3.org/2004/02/skos/core#definition> "Pose as defined by https://www.ogc.org/publications/standard/geopose/" ;
       <http://www.w3.org/2004/02/skos/core#prefLabel> "Pose" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/PoseCollection
 :PoseCollection rdf:type owl:Class ;
-                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObjectCollection> ;
+                rdfs:subClassOf geo:SpatialObjectCollection ;
                 <http://www.w3.org/2004/02/skos/core#definition> "Collection of Poses" ;
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "PoseCollection" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/RML_Image
 :RML_Image rdf:type owl:Class ;
-           rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+           rdfs:subClassOf geo:SpatialObject ;
            <http://www.w3.org/2004/02/skos/core#definition> "Image observation of RML Feature" ;
            <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Image" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Trajectory
 :Trajectory rdf:type owl:Class ;
-            rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Geometry> ;
+            rdfs:subClassOf geo:Geometry ;
             <http://www.w3.org/2004/02/skos/core#definition> "Spatiotemporal curve in 4D space" ;
             <http://www.w3.org/2004/02/skos/core#prefLabel> "Trajectory" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Volume
 :Volume rdf:type owl:Class ;
-        rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+        rdfs:subClassOf geo:SpatialObject ;
         <http://www.w3.org/2004/02/skos/core#definition> "Positioned, oriented, and delimited spatial volume" ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Volume" .
 
@@ -345,15 +347,15 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoop
 :GreenScoop rdf:type owl:NamedIndividual ,
-                     <http://www.opengis.net/ont/geosparql#Feature> ;
+                     geo:Feature ;
             :hasFeatureState :GreenScoopState-1 ;
             <http://www.w3.org/2004/02/skos/core#definition> "Scoop used to pack powder into press jig" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoopGeometry
 :GreenScoopGeometry rdf:type owl:NamedIndividual ,
-                             <http://www.opengis.net/ont/geosparql#Geometry> ;
-                    <http://www.opengis.net/ont/geosparql#hasSerialization> "" .
+                             geo:Geometry ;
+                    geo:hasSerialization "" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/GreenScoopImage-1
@@ -381,7 +383,7 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Lab
 :Lab rdf:type owl:NamedIndividual ,
-              <http://www.opengis.net/ont/geosparql#Feature> ;
+              geo:Feature ;
      :boundingVolume :LabSpace ;
      :contains :Press .
 
@@ -400,7 +402,7 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/PowerLight
 :PowerLight rdf:type owl:NamedIndividual ,
-                     <http://www.opengis.net/ont/geosparql#Feature> ;
+                     geo:Feature ;
             :partOf :Press ;
             <http://www.w3.org/2004/02/skos/core#definition> "Power On/Off light on press" .
 
@@ -430,7 +432,7 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Press
 :Press rdf:type owl:NamedIndividual ,
-                <http://www.opengis.net/ont/geosparql#Feature> ;
+                geo:Feature ;
        :boundingVolume :PressSpace ;
        <http://www.w3.org/2004/02/skos/core#definition> "Powder press used for procedure" .
 
