@@ -17,6 +17,22 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#boundedBy
+:boundedBy rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :containedBy ;
+           <http://www.w3.org/2004/02/skos/core#definition> """Inverse of boundedBy
+SpatialObject is bounded by Volume in 3-4D""" ;
+           <http://www.w3.org/2004/02/skos/core#prefLabel> "boundedBy" .
+
+
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#containedBy
+:containedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             <http://www.w3.org/2004/02/skos/core#definition> """Inverse of contains
+SpatialObject is contained in 4D by a Volume""" ;
+             <http://www.w3.org/2004/02/skos/core#prefLabel> "containedBy" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/boundingVolume
 :boundingVolume rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf :volume ;
@@ -46,7 +62,7 @@
                      owl:onProperty :bounds ;
                      owl:someValuesFrom geo:Geometry
                    ] ;
-        <http://www.w3.org/2004/02/skos/core#definition> "4D bounding of a geometry by a bounding volume. For dynamic features, the bounding volume also provides the coordinate reference system in which the geometric positions are provided (hasSerialization)." ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Volume bounds a SpatialObject in 4D For dynamic features, the bounding volume also provides the coordinate reference system in which  coordinate positions for the SpatialObject are provided (hasSerialization)." ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "bounds" .
 
 
@@ -61,7 +77,7 @@
                        owl:onProperty :contains ;
                        owl:someValuesFrom geo:SpatialObject
                      ] ;
-          <http://www.w3.org/2004/02/skos/core#definition> "4D containment of a spatial object by a volume." ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Volume contains a spatial object in 4D." ;
           <http://www.w3.org/2004/02/skos/core#prefLabel> "contains" .
 
 
@@ -226,6 +242,14 @@
 #    Data properties
 #################################################################
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasVolumeBounds
+:hasVolumeBounds rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:range rdfs:Literal ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "List of bounding values for Volume dimensional axes" ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "hasVolumeBounds" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asLTP-ENUSpec
 :asLTP-ENUSpec rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf :hasFrameSpec ;
@@ -240,7 +264,25 @@
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/asQuarternionGenericSpec
 :asQuarternionGenericSpec rdf:type owl:DatatypeProperty ;
-                          rdfs:subPropertyOf :hasFrameSpec .
+                          rdfs:subPropertyOf :hasFrameSpec ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "Specification of Advanced (Geo)Pose as JSON per https://docs.ogc.org/is/21-056r11/21-056r11.html#rc-advanced-json-1" ;
+                          <http://www.w3.org/2004/02/skos/core#example> """Example of Advanced (Geo)Pose serialized in JSON. See https://docs.ogc.org/is/21-056r11/21-056r11.html#r-graph-json-1-1 for additional encoding of (nested) Pose graph specifications
+
+{
+  \"frameSpecification\": {
+    \"authority\": \"/RML/1.0\",
+    \"id\": \"LabVolume\",
+    \"parameters\": \"x=-122.3000000&y=47.7000000&z=11.000\"
+  },
+  \"quaternion\": {
+    \"x\": 0.20056154657066608,
+    \"y\": -0.08111602541464237,
+    \"z\": 0.36606032744426537,
+    \"w\": -0.9050939692261301
+  },
+  \"validTime\": 1630560671227
+}""" ;
+                          <http://www.w3.org/2004/02/skos/core#prefLabel> "asQuaternionGenericSpec" .
 
 
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/hasAugmentation
@@ -339,7 +381,7 @@ geo:SpatialObjectCollection rdf:type owl:Class .
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml/Volume
 :Volume rdf:type owl:Class ;
         rdfs:subClassOf geo:SpatialObject ;
-        <http://www.w3.org/2004/02/skos/core#definition> "Positioned, oriented, and delimited spatial volume" ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Positioned, oriented (hasPose), and delimited spatial volume" ;
         <http://www.w3.org/2004/02/skos/core#prefLabel> "RML Volume" .
 
 
