@@ -242,6 +242,27 @@ SpatialObject is contained in 4D by a Volume""" ;
 #    Data properties
 #################################################################
 
+###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#asRmlQuaternionSpec
+:asRmlQuaternionSpec rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :hasFrameSpec ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "Explicit GeoPose Frame Specification serialized in JSON and defined in the coordinate system of a labeled reference Volume (\"refvol\")." ;
+                     <http://www.w3.org/2004/02/skos/core#example> """{
+  “localposition\": {
+    “refvol”: “LabVolume”,
+    “x”: 47.7,
+    “y”: -122.3,
+    “z”: 11.5
+  },
+  \"quaternion\": {
+    \"x\": 0.20054473382601948,
+    \"y\": -0.08111675703887213,
+    \"z\": 0.3660908114262869,
+    \"w\": -0.9050852994339209
+  }
+}""" ;
+                     <http://www.w3.org/2004/02/skos/core#prefLabel> "asRmlQuaternionSpec" .
+
+
 ###  http://www.semanticweb.org/joshlie/ontologies/2025/1/rml#hasVolumeBounds
 :hasVolumeBounds rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf owl:topDataProperty ;
